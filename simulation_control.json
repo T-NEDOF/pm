@@ -1,0 +1,25 @@
+{
+  "widgetsBundle": {
+    "alias": "simulation_control",
+    "title": "simulation control",
+    "image": null
+  },
+  "widgetTypes": [
+    {
+      "alias": "simulation",
+      "name": "simulation",
+      "descriptor": {
+        "type": "static",
+        "sizeX": 7.5,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\r\n\r\n</head>\r\n<body>\r\n<div class=\"header\">\r\n<h3>Sensor data simulation </h3>\r\n</div>\r\n<div class=\"container\">\r\n  <img src=\"https://photos.google.com/share/AF1QipNoKLamxQxn1wc4Hd482q8m7XAROhSkJkcOoiqayUUpFvglQfMEif4rwRvS-vgxpg/photo/AF1QipNktbB2Wwi34mufFBI0cPfE_5QNxZkfyNHKEe_W?key=SmRXNFQwQW5id0lkb1JjYkZNSkxxeU95RnRmWEJn\" >\r\n</div>\r\n<div class=\"button\">\r\n<button class=\"btn\" mat-raised-button color=\"primary\" (click)=\"simulation()\">START SIMULATION</button>\r\n</div>\r\n</body>\r\n</html>\r\n\r\n",
+        "templateCss": ".header {\r\nwidth: 100%;\r\n  height: auto;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.header h3 {\r\n  position: absolute\r\n  top: 70px; \r\n  right: 10px\r\n}\r\n.container {\r\n  position: relative;\r\n  width: 100%;\r\n  max-width: 400px;\r\n  justify-content: center;\r\n  align-items: center;\r\n\r\n  \r\n}\r\n\r\n.container img {\r\n  width: 100%;\r\n  height: auto;\r\n}\r\n\r\n.button .btn {\r\n  position: relative;\r\n  top: 50%;\r\n  left: 50%;\r\n  /*background-color: #555;*/\r\n  /*color: white;*/\r\n  /*font-size: 16px;*/\r\n  /*padding: 12px 24px;*/\r\n  border: none;\r\n  cursor: pointer;\r\n  /*border-radius: 5px;*/\r\n  text-align: center;\r\n}\r\n\r\n",
+        "controllerScript": "// self.onInit = function() {}\r\n\r\n// function simulation() {\r\n//     alert(\"a\")\r\n//     if (document.querySelector('#btn').innerText ==\r\n//         'START SIMULATION') {\r\n//         document.querySelector('#btn').innerText =\r\n//             'STOP SIMULATION'\r\n//     } else {\r\n//         document.querySelector('#btn').innerText =\r\n//             'START SIMULATION'\r\n//     }\r\n//     // document.querySelector('#btn').innerText = 'START SIMULATION'\r\n// }\r\n\r\n\r\nself.onInit = function() {\r\n    self.ctx.$scope.simulation = function() {\r\n         alert(\"a\");\r\n    if (document.querySelector('.btn').innerText ==\r\n        'START SIMULATION') {\r\n        document.querySelector('.btn').innerText =\r\n            'STOP SIMULATION'\r\n        const Http = new XMLHttpRequest();\r\n        const url='http://10.1.0.173:5050/simulation/start';\r\n        Http.open(\"GET\", url);\r\n        Http.send();\r\n        Http.onreadystatechange = (e) => {\r\n          console.log(Http.responseText)\r\n        }\r\n    } else {\r\n        document.querySelector('.btn').innerText =\r\n            'START SIMULATION'\r\n        const Http = new XMLHttpRequest();\r\n        const url='http://10.1.0.173:5050/simulation/stop';\r\n        Http.open(\"GET\", url);\r\n        Http.send();\r\n        Http.onreadystatechange = (e) => {\r\n          console.log(Http.responseText)\r\n        }\r\n    }\r\n         \r\n    };\r\n};",
+        "settingsSchema": "{\n    \"schema\": {\n        \"type\": \"object\",\n        \"title\": \"Settings\",\n        \"required\": [\"cardHtml\"],\n        \"properties\": {\n            \"cardCss\": {\n                \"title\": \"CSS\",\n                \"type\": \"string\",\n                \"default\": \".card {\\n font-weight: bold; \\n}\"\n            },\n            \"cardHtml\": {\n                \"title\": \"HTML\",\n                \"type\": \"string\",\n                \"default\": \"<div class='card'>HTML code here</div>\"\n            }\n        }\n    },\n    \"form\": [\n        {\n            \"key\": \"cardCss\",\n            \"type\": \"css\"\n        },           \n        {\n            \"key\": \"cardHtml\",\n            \"type\": \"html\"\n        }    \n    ]\n}",
+        "dataKeySettingsSchema": "{}\n",
+        "defaultConfig": "{\"timewindow\":{\"realtime\":{\"timewindowMs\":60000}},\"showTitle\":false,\"backgroundColor\":\"rgb(255, 255, 255)\",\"color\":\"rgba(0, 0, 0, 0.87)\",\"padding\":\"8px\",\"settings\":{\"cardHtml\":\"<div class='card'>HTML code here</div>\",\"cardCss\":\".card {\\n    font-weight: bold;\\n    font-size: 32px;\\n    color: #999;\\n    width: 100%;\\n    height: 100%;\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n}\"},\"title\":\"simulation\",\"dropShadow\":true,\"datasources\":[]}"
+      }
+    }
+  ]
+}
